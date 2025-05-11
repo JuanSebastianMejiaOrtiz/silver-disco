@@ -1,4 +1,8 @@
-def findStartLine(file, startLine):
+# File must be TextIOWrapper
+# Can't put the type for the parameter because it needs to be imported
+# The only packages that are allowed to be imported are:
+# Numpy, Scipy and Matplotlib
+def findStartLine(file, startLine: str) -> bool:
     for line in file:
         if startLine in line:
             return True
@@ -6,7 +10,7 @@ def findStartLine(file, startLine):
     return False
 
 
-def makeCoordinateVector(line):
+def makeCoordinateVector(line: str) -> list[float]:
     equalIndex = line.find('=')
     x = 1
     if line[equalIndex + 1] == '-':
@@ -29,14 +33,15 @@ def makeCoordinateVector(line):
     return vector
 
 
-def getCoordinatesFromFile(fileName, startLine, endLine):
-    coordinates = []
+def getCoordinatesFromFile(fileName: str, startLine: str, endLine: str) -> list[list[float]]:
+    coordinates: list[list[float]] = []
     with open(fileName, encoding='utf-8') as file:
         startFound = findStartLine(file, startLine)
 
         if not startFound:
-            print("No se encontro la linea de inicio")
-            return
+            print("Start line not found")
+            # TODO: Check if this is the right exception to raise
+            raise EOFError
 
         next(file)
 
@@ -47,7 +52,7 @@ def getCoordinatesFromFile(fileName, startLine, endLine):
                 if endLine in line:
                     break
 
-                # Procesamiento de las coordenadas
+                # Processing coordinates and adding them to the list
                 coordinates.append(makeCoordinateVector(line.strip()))
 
                 for _ in range(3):
@@ -57,26 +62,3 @@ def getCoordinatesFromFile(fileName, startLine, endLine):
                 break
 
     return coordinates
-
-
-earthCoordinates = getCoordinatesFromFile(
-    fileName="public/planetOrbitData/horizons_results_monthly_earth.txt",
-    startLine="$$SOE",
-    endLine="***"
-)
-
-print(earthCoordinates)
-
-'''
-jupiterCoordinates = getCoordinatesFromFile(
-    fileName="./planetOrbitData/horizons_results_monthly_jupiter.txt",
-    startLine="$$SOE",
-    endLine="***"
-)
-
-saturnCoordinates = getCoordinatesFromFile(
-    fileName="./planetOrbitData/horizons_results_monthly_saturn.txt",
-    startLine="$$SOE",
-    endLine="***"
-)
-'''
