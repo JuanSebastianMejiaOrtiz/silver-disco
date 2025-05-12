@@ -123,6 +123,7 @@ def benchmark(x, fun, method, jac):
     except:
         print("Error in method with Jacobian:", method)
 
+
 x = np.ones(10)
 benchmark(x, fun, "hybr", jac)
 benchmark(x, fun, "lm", jac)
