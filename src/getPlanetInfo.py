@@ -33,7 +33,7 @@ def makeCoordinateVector(line: str) -> list[float]:
     return vector
 
 
-def getCoordinatesFromFile(fileName: str, startLine: str, endLine: str) -> list[list[float]]:
+def getCoordinatesFromFile(fileName: str, startLine: str = "$$SOE", endLine: str = "***") -> list[list[float]]:
     coordinates: list[list[float]] = []
     with open(fileName, encoding='utf-8') as file:
         startFound = findStartLine(file, startLine)
