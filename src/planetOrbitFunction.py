@@ -25,11 +25,10 @@ def householderMethod(points: list[list[float]]) -> np.ndarray | None:
     b[0] = epsilon
 
     m, n = A.shape
-    Q = np.eye(m)  # Matriz ortogonal Q
-    R = A.copy()    # Matriz triangular superior R
+    Q = np.eye(m)  # Orthogonal matrix
+    R = A.copy()    # Upper triangular matrix
 
     for k in range(n):
-        # Vector of the k-th column
         x = R[k:, k]
 
         # Calculation of the Householder vector
