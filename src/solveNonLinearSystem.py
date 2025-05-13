@@ -104,10 +104,10 @@ def jac(x):
     return J
 
 
-def benchmark(x, fun, method, jac):
+def benchmark(x, fun, method, tol, jac):
     try:
         time1 = time.perf_counter()
-        print("Solution:", root(fun, x, method=method))
+        print("Solution:", root(fun, x, method=method, tol=tol))
         time2 = time.perf_counter()
         print("Time:", time2-time1)
         print("\n")
@@ -116,7 +116,7 @@ def benchmark(x, fun, method, jac):
 
     try:
         time1 = time.perf_counter()
-        print("Solution with Jacobian:", root(fun, x, jac=jac, method=method))
+        print("Solution with Jacobian:", root(fun, x, tol=tol, method=method, jac=jac))
         time2 = time.perf_counter()
         print("Time:", time2-time1)
         print("\n\n")
@@ -125,15 +125,16 @@ def benchmark(x, fun, method, jac):
 
 
 x = np.ones(10)
-benchmark(x, fun, "hybr", jac)
-benchmark(x, fun, "lm", jac)
-benchmark(x, fun, "broyden1", jac)
-benchmark(x, fun, "broyden2", jac)
-benchmark(x, fun, "anderson", jac)
-benchmark(x, fun, "linearmixing", jac)
-benchmark(x, fun, "diagbroyden", jac)
-benchmark(x, fun, "excitingmixing", jac)
-benchmark(x, fun, "krylov", jac)
-benchmark(x, fun, "df-sane", jac)
+tol = 1e-8
+benchmark(x, fun, "hybr", tol, jac)
+benchmark(x, fun, "lm", tol, jac)
+benchmark(x, fun, "broyden1", tol, jac)
+benchmark(x, fun, "broyden2", tol, jac)
+benchmark(x, fun, "anderson", tol, jac)
+benchmark(x, fun, "linearmixing", tol, jac)
+benchmark(x, fun, "diagbroyden", tol, jac)
+benchmark(x, fun, "excitingmixing", tol, jac)
+benchmark(x, fun, "krylov", tol, jac)
+benchmark(x, fun, "df-sane", tol, jac)
 
 print("Finished")
