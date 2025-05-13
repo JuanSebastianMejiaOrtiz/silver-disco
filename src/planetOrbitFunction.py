@@ -155,7 +155,7 @@ solveForPlanet("saturn", choleskyMethod, [-1e10, 1e10])
 
 print("\n\nUsing Householder method")
 solveForPlanet("earth", householderMethod, [-1e8, 1e8])
-solveForPlanet("jupiter", householderMethod)
+solveForPlanet("jupiter", householderMethod, [-3e9, 3e9])
 solveForPlanet("saturn", householderMethod, [-1e10, 1e10])
 
 plt.show()
